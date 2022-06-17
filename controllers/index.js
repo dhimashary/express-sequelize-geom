@@ -1,30 +1,35 @@
 const { sequelize } = require('../models');
 
 module.exports = {
-  async findStores(req, res) {
+  async findStoresByRadius(req, res) {
     try {
       // distance on meter unit
       const distance = req.query.distance || 1000;
+      const long = req.query.long || '-6.9439994342171225';
+      const lat = req.query.lat || '107.5904275402039';
+
       const result = await sequelize.query(
         `select
         id,
         name,
         ST_DWithin(location,
-        ST_MakePoint(107.5904275402039,
-        -6.9439994342171225),
+        ST_MakePoint(:lat,
+        :long),
         :distance,
         true)
       from
         "Stores"
       where
         ST_DWithin(location,
-        ST_MakePoint(107.5904275402039,
-        -6.9439994342171225),
+        ST_MakePoint(:lat,
+        :long),
         :distance,
       true) = true;`,
         {
           replacements: {
             distance: +distance,
+            long: parseFloat(long),
+            lat: parseFloat(lat),
           },
           logging: console.log,
           plain: false,
