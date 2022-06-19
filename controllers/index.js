@@ -12,11 +12,7 @@ module.exports = {
         `select
         id,
         name,
-        ST_DWithin(location,
-        ST_MakePoint(:lat,
-        :long),
-        :distance,
-        true)
+        location
       from
         "Stores"
       where
