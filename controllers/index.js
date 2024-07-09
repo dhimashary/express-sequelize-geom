@@ -5,8 +5,8 @@ module.exports = {
     try {
       // distance on meter unit
       const distance = req.query.distance || 1000;
-      const long = req.query.long || '-6.9439994342171225';
-      const lat = req.query.lat || '107.5904275402039';
+      const lat = req.query.lat || '-6.9439994342171225';
+      const long = req.query.long || '107.5904275402039';
 
       const result = await sequelize.query(
         `select
