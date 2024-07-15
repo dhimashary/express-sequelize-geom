@@ -17,8 +17,8 @@ module.exports = {
         "Stores"
       where
         ST_DWithin(location,
-        ST_MakePoint(:lat,
-        :long),
+        ST_MakePoint(:long,
+        :lat),
         :distance,
       true) = true;`,
         {
